@@ -8,7 +8,7 @@
     "start": "node app.js"
   },
   "author": "",
-  "repository": "daemonforge/DayZ-UniveralApi",
+  "repository": "bage-jj/DayZ-UniveralApi",
   "license": "AGPL-3.0-or-later",
   "dependencies": {
     "@tensorflow-models/toxicity": "^1.2.2",

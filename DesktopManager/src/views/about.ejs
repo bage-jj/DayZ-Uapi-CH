@@ -34,37 +34,40 @@
     <body>
     <%- include('../sections/nav'); -%>
     <main>
-        <h1>DayZ Univeral Api Version: <%= global.APIVERSION -%></h1>
-        <% if (global.STABLEVERSION !== global.APIVERSION) { 
-        %><h2 style="color: #dc6862"> OUTDATED <a href="<%= global.NEWVERSIONDOWNLOAD -%>"  target="_blank">Download Latest</a> </h2><% 
+        <h1>DayZ 通用 API 版本: <%= global.APIVERSION -%></h1>
+        <% if (global.STABLEVERSION !== global.APIVERSION) {
+        %><h2 style="color: #dc6862"> 已过时 <a href="<%= global.NEWVERSIONDOWNLOAD -%>"  target="_blank">下载最新版本</a> </h2><%
         } else { %>
-            <h2 style="color: #6ece87"> Up To Date</h2>
+            <h2 style="color: #6ece87"> 版本最新</h2>
         <% } %>
         <article style="margin: 30px; margin-top:0px; text-align: left;">
             <div id="status" style="display: none; margin: 5px; font-weight: bold; text-align: center;">
-                <div>Database: <span id="dbstatus" class="Error">Error</span> | Discord: <span id="discordstatus">Disabled</span> | Translate: <span id="translatestatus">Disabled</span></div>
-                <div id="error" class="Error" style="display: none; padding: 10px; font-weight: bold; background-color: var(--background-alt)">Errors: <span id="errortext"></span></div>
+                <div>数据库: <span id="dbstatus" class="Error">错误</span> | Discord: <span id="discordstatus">已禁用</span> | 翻译: <span id="translatestatus">已禁用</span></div>
+                <div id="error" class="Error" style="display: none; padding: 10px; font-weight: bold; background-color: var(--background-alt)">错误: <span id="errortext"></span></div>
                 
             </div>
             <p style="margin-left: 4px; margin-top: 5px">
-            A univeral API for dayz allowing more flexibility for modders and sever owners to have API intergration, as well as a robust flexible database backend.
+            一个通用的 DayZ API，为模组制作者和服务器所有者提供更灵活的 API 集成，以及强大灵活的数据库后端。
             </p>
             <blockquote style="font-weight: bold; margin-bottom: 0px; color: #dd97ca" >
-                In order for the database and client authentication to work you must install MongoDB you can either use a local installation using the MongoDB Community Edition Installer or host it on the cloud with MongoDB Atlas for free, keep in mind if you use the cloud version you will want to pick the closest location to your server hosting the API.
+                为了使数据库和客户端认证正常工作，您必须安装 MongoDB。您可以使用 MongoDB Community Edition 安装程序进行本地安装，或者在云端免费托管 MongoDB Atlas。请记住，如果您使用云版本，您需要选择离托管 API 的服务器最近的位置。
             </blockquote>
             <ul style="text-align: left; margin-top: 0px">
-                <li><a href="https://www.mongodb.com/try/download/community" target="_blank">MongoDB Installer</a></li>
-                <li><a href="https://account.mongodb.com/account/" target="_blank">MongoDB Atlas(Cloud Database)</a></li>
+                <li><a href="https://www.mongodb.com/try/download/community" target="_blank">MongoDB 安装程序</a></li>
+                <li><a href="https://account.mongodb.com/account/" target="_blank">MongoDB Atlas（云数据库）</a></li>
             </ul>
             <p style="margin-left: 4px; margin-top: 0px">
-                If installing locally just restart the API Webservice and it should work, otherwise go to the config page and edit the config to be the connection string for the cloud instance.
+                如果本地安装，只需重启 API 网络服务即可工作。否则，请进入配置页面，将配置编辑为云实例的连接字符串。
             </p>
             <blockquote style="font-weight: bold; color: #dd97ca">
-            For help with the api or instructions on how to configure any of the API intergrations reference the <a href="https://github.com/daemonforge/DayZ-UniveralApi/wiki" target="_blank">Wiki</a>
+            有关 API 帮助或如何配置任何 API 集成的说明，请参考 <a href="https://github.com/bage-jj/DayZ-Uapi-CH/wiki" target="_blank">Wiki</a>
+            </blockquote>
+            <blockquote style="font-weight: bold; color: #dd97ca">
+            本项目基于 <a href="<%= global.ORIGINAL_REPO %>" target="_blank">DayZ Universal API</a> 修改，感谢原作者的贡献
             </blockquote>
         </article>
         <section style="text-align: center;">
-            <h2>How to support me</h2>
+            <h2>如何支持我</h2>
             <div class="logoBlock" >
                 <a href="https://daemonforge.dev/Paypal/" target="_blank">
                     <button style="padding: 6px 16px; font-size: 18px; color: #003087;">
@@ -75,13 +78,13 @@
                     <button style="padding: 6px 12px; font-size: 18px; color: #003087;">
                         <svg aria-hidden="true" viewBox="0 0 16 16" version="1.1" style="height:18px; width:18px; color: #ea4aaa; fill: #ea4aaa; margin-top:4px">
     <path fill-rule="evenodd" d="M4.25 2.5c-1.336 0-2.75 1.164-2.75 3 0 2.15 1.58 4.144 3.365 5.682A20.565 20.565 0 008 13.393a20.561 20.561 0 003.135-2.211C12.92 9.644 14.5 7.65 14.5 5.5c0-1.836-1.414-3-2.75-3-1.373 0-2.609.986-3.029 2.456a.75.75 0 01-1.442 0C6.859 3.486 5.623 2.5 4.25 2.5zM8 14.25l-.345.666-.002-.001-.006-.003-.018-.01a7.643 7.643 0 01-.31-.17 22.075 22.075 0 01-3.434-2.414C2.045 10.731 0 8.35 0 5.5 0 2.836 2.086 1 4.25 1 5.797 1 7.153 1.802 8 3.02 8.847 1.802 10.203 1 11.75 1 13.914 1 16 2.836 16 5.5c0 2.85-2.045 5.231-3.885 6.818a22.08 22.08 0 01-3.744 2.584l-.018.01-.006.003h-.002L8 14.25zm0 0l.345.666a.752.752 0 01-.69 0L8 14.25z"></path>
-</svg> <strong style="font-size: 18px; height:100%;">Sponsor</strong>
+</svg> <strong style="font-size: 18px; height:100%;">赞助</strong>
                     </button>
                 </a>
             </div>
 	    </section>
         <section style="text-align: center;" >
-            <h3>Where to find Me and More Information</h3>
+            <h3>在哪里找到我和更多信息</h3>
             <div>
                 <div class="logoBlock" >
                     <a href="https://daemonforge.dev/Discord/" target="_blank">
@@ -101,7 +104,7 @@
                 <div class="logoBlock">
                     <a href="https://daemonforge.dev/Steam/" target="_blank">
                         <button style="padding: 10px 16px; font-size: 24px; height: 52px; color: #AFAFAF">
-                    <i class="fa fa-steam" style="padding-right: 5px" ></i> <strong style="color: #AFAFAF">Workshop</strong></button></a>
+                    <i class="fa fa-steam" style="padding-right: 5px" ></i> <strong style="color: #AFAFAF">创意工坊</strong></button></a>
                 </div>
             </div>
 	    </section>

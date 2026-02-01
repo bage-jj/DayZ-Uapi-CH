@@ -55,11 +55,11 @@ async function runGet(req, res, GUID, mod, auth) {
             
             if ((await collection.countDocuments(query)) == 0){
                 if ((CheckServerAuth(auth) || global.config.AllowClientWrite) && !isEmpty(RawData)){
-                    log("Can't find Player with ID " + GUID + "Creating it now");
+                    log("找不到玩家ID " + GUID + "，现在创建");
                     const doc  = JSON.parse("{ \"GUID\": \"" + GUID + "\", \""+mod+"\": "+ StringData + " }");
                     await collection.insertOne(doc);
                 } else {
-                    log("Can't find Player with ID " + GUID, "warn");
+                    log("找不到玩家ID " + GUID, "warn");
                 }
                 res.status(201);
                 res.json(RawData);
@@ -71,7 +71,7 @@ async function runGet(req, res, GUID, mod, auth) {
                     if(key === mod){
                         sent = true;
                         res.json(value);
-                        log("Retrieving "+ mod + " Data for GUID: " + GUID);
+                        log("正在获取 "+ mod + " 数据，GUID: " + GUID);
                     }
                 }
                 if (sent != true){
@@ -80,9 +80,9 @@ async function runGet(req, res, GUID, mod, auth) {
                         const updateDoc = { $set: updateDocValue, };
                         const options = { upsert: false };
                         await collection.updateOne(query, updateDoc, options);
-                        log("Can't find "+ mod + " Data for GUID: " + GUID +  " Creating it now");
+                        log("找不到 "+ mod + " 数据，GUID: " + GUID +  "，现在创建");
                     } else {
-                        log("Can't find "+ mod + " Data for GUID: " + GUID, "warn");
+                        log("找不到 "+ mod + " 数据，GUID: " + GUID, "warn");
                     }
                     res.status(203);
                     res.json(RawData);
@@ -119,11 +119,11 @@ async function runSave(req, res, GUID, mod, auth) {
             const updateDoc = { $set: updateDocValue, };
             const result = await collection.updateOne(query, updateDoc, options);
             if (result.matchedCount === 1 || result.upsertedCount >= 1){
-                log("Updated "+ mod + " Data for GUID: " + GUID);
+                log("已更新 "+ mod + " 数据，GUID: " + GUID);
                 res.status(200);
                 res.json(RawData);
             } else {
-                log("Error with Updating "+ mod + " Data for GUID: " + GUID, "warn");
+                log("更新 "+ mod + " 数据时出错，GUID: " + GUID, "warn");
                 res.status(203);
                 res.json(req.body);
             }
@@ -193,11 +193,11 @@ async function runUpdate(req, res, GUID, mod, auth) {
 
             const result = await collection.updateOne(query, updateDoc, options);
             if (result.matchedCount >= 1 || result.upsertedCount >= 1){
-                log("Updated " + element +" for "+ mod + " Data for GUID: " + GUID);
+                log("已更新 " + element +" 对于 "+ mod + " 数据，GUID: " + GUID);
                 res.status(200);
                 res.json({ Status: "Success", Element: element, Mod: mod, ID: GUID});
             } else {
-                log("Error with Updating " + element +" for "+ mod + " Data for GUID: " + GUID, "warn");
+                log("更新 " + element +" 对于 "+ mod + " 数据时出错，GUID: " + GUID, "warn");
                 res.status(203);
                 res.json({ Status: "NotFound", Element: element, Mod: mod, ID: GUID});
             }
@@ -229,11 +229,11 @@ async function runGetPublic(req, res, GUID, mod, auth) {
         
         if ((await collection.countDocuments(query)) == 0){
             if (auth !== "null" && (CheckServerAuth(auth) || ((await CheckPlayerAuth(GUID, auth)) && global.config.AllowClientWrite))){
-                log("Can't find Player with ID " + GUID + " Creating it now");
+                log("找不到玩家ID " + GUID + "，现在创建");
                 const doc  = JSON.parse(`{ "GUID": "${GUID}", "Public": { "${mod}": "${RawData.Value}" } }`);
                 await collection.insertOne(doc);
             } else {
-                 log("Can't find Player with ID " + GUID, "warn");
+                 log("找不到玩家ID " + GUID, "warn");
             }
             res.status(201);
             res.json(RawData);
@@ -246,7 +246,7 @@ async function runGetPublic(req, res, GUID, mod, auth) {
                 if(key === mod){
                     sent = true;
                     res.json({ "Value": value });
-                    log("Retrieving "+ mod + " Data for GUID: " + GUID);
+                    log("正在获取 "+ mod + " 数据，GUID: " + GUID);
                 }
             }
             if (sent !== true){
@@ -255,9 +255,9 @@ async function runGetPublic(req, res, GUID, mod, auth) {
                     const updateDoc = { $set: updateDocValue, };
                     const options = { upsert: false };
                     await collection.updateOne(query, updateDoc, options);
-                    log("Can't find "+ mod + " Data for GUID: " + GUID +  " Creating it now");
+                    log("找不到 "+ mod + " 数据，GUID: " + GUID +  "，现在创建");
                 } else {
-                    log("Can't find "+ mod + " Data for GUID: " + GUID, "warn");
+                    log("找不到 "+ mod + " 数据，GUID: " + GUID, "warn");
                 }
                 res.status(203);
                 res.json(RawData);
@@ -289,11 +289,11 @@ async function runSavePublic(req, res, GUID, mod, auth) {
             const updateDoc = { $set: updateDocValue, };
             const result = await collection.updateOne(query, updateDoc, options);
             if ( result.matchedCount === 1 || result.upsertedCount === 1 ){
-                log("Updated "+ mod + " Data for GUID: " + GUID);
+                log("已更新 "+ mod + " 数据，GUID: " + GUID);
                 res.status(200);
                 res.json(RawData);
             } else {
-                log("Error with Updating "+ mod + " Data for GUID: " + GUID, "warn");
+                log("更新 "+ mod + " 数据时出错，GUID: " + GUID, "warn");
                 res.status(203);
                 res.json(RawData);
             }

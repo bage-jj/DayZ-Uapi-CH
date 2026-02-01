@@ -117,7 +117,7 @@ async function GetServerStatus(req, res, ip, port, auth){
                     FirstPerson: response.first_person ? 1 : 0
                 }
                 isSent = true;
-                log("Server Status Check requested for " + response.ip + ":" + response.query_port);
+                log("服务器状态检查请求，IP: " + response.ip + ":" + response.query_port);
                 res.status(200);
                 res.json(statusobj);
 
@@ -147,8 +147,8 @@ async function GetServerStatus(req, res, ip, port, auth){
             return;
     } else {
         res.status(401);
-        log("Invalid Authkey Server Query");
-        res.json({Status: "Error", Error: "Invalid Auth" });
+        log("无效的授权密钥，服务器查询");
+        res.json({Status: "Error", Error: "无效的授权" });
         return;
     }
 }

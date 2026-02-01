@@ -78,14 +78,14 @@ async function runStatusCheck(req, res, auth) {
            // log("Status Check Called", "info"); 
         } else {
             res.status(500);
-            res.json({Status: "Error", Error: "Database Write Error", Version: global.APIVERSION, Discord: global.DISCORDSTATUS, Translate: TranslatesEnabled, Wit: WitsEnabled, QnA: QnAEnabled, LUIS: LUISEnabled });
-            log("ERROR: Database Write Error", "warn");
+            res.json({Status: "Error", Error: "数据库写入错误", Version: global.APIVERSION, Discord: global.DISCORDSTATUS, Translate: TranslatesEnabled, Wit: WitsEnabled, QnA: QnAEnabled, LUIS: LUISEnabled });
+            log("错误: 数据库写入错误", "warn");
         }
     }catch(err){
         console.log(err);
         res.status(500);
-        res.json({Status: "Error", Error: `Error: ${err}`, Version: global.APIVERSION, Discord: global.DISCORDSTATUS, Translate: TranslatesEnabled, Wit: WitsEnabled, QnA: QnAEnabled, LUIS: LUISEnabled });
-        log("ERROR: " + err, "warn");
+        res.json({Status: "Error", Error: `错误: ${err}`, Version: global.APIVERSION, Discord: global.DISCORDSTATUS, Translate: TranslatesEnabled, Wit: WitsEnabled, QnA: QnAEnabled, LUIS: LUISEnabled });
+        log("错误: " + err, "warn");
     }finally{
         // Ensures that the client will close when you finish/error
         client.close();

@@ -208,7 +208,7 @@ async function InstallIndexes(){
       let gcollection = db.collection("Globals");
       const gresult = await gcollection.createIndex({ Mod: 1 });
       //console.log(gresult);
-      log("Successfully Created Indexes")
+      log("成功创建索引")
       returnvalue= true;
     } catch(e){
       log(e, "warn");
@@ -228,7 +228,7 @@ async function InstallIndexes(){
             log(e, "warn")
           }
         } else {
-          log("Failed to create indexes", "warn")
+          log("创建索引失败", "warn")
         }
     }
   }
@@ -243,19 +243,19 @@ async function CheckRecentVersion(){
       }
       let vc = versionCompare(global.APIVERSION, global.STABLEVERSION);
       if (global.STABLEVERSION === "0.0.0"){
-        log(`WARNING!!! Could check for the current stable version`, "warn");
+        log(`警告!!! 无法检查当前稳定版本`, "warn");
       } else if (vc > 0){
-        log(`WARNING!!! You are running a unpublished version, note it may not work as expected`, "warn")
-        log(`Installed Version: ${global.APIVERSION} Stable Version: ${global.STABLEVERSION} `);
+        log(`警告!!! 您正在运行一个未发布的版本，请注意它可能无法正常工作`, "warn")
+        log(`已安装版本: ${global.APIVERSION} 稳定版本: ${global.STABLEVERSION} `);
       } else if (vc < 0){
-        log(`!!!WARNING!!! You're API is currently out of date `, "warn")
-        log(`Installed Version: ${global.APIVERSION} Stable Version: ${global.STABLEVERSION}`);
-        log(`WARNING!!! Download Link - ${global.NEWVERSIONDOWNLOAD}`, "warn");
+        log(`!!!警告!!! 您的API当前已过时 `, "warn")
+        log(`已安装版本: ${global.APIVERSION} 稳定版本: ${global.STABLEVERSION}`);
+        log(`警告!!! 下载链接 - ${global.NEWVERSIONDOWNLOAD}`, "warn");
       } else {
-        log(`API Is currently running the most recent Stable Version: ${global.APIVERSION}`);
+        log(`API 当前正在运行最新的稳定版本: ${global.APIVERSION}`);
       }
     } catch (err){
-      log(`WARNING!!! Couldn't check for the current stable version`, "warn");
+      log(`警告!!! 无法检查当前稳定版本`, "warn");
       console.log(err);
     }
   }

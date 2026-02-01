@@ -2,7 +2,8 @@ if (global.APIVERSION === undefined) {
   global.APIVERSION = process.env.npm_package_version || require('./package.json').version;
 }
 global.STABLEVERSION = '0.0.0';
-global.NEWVERSIONDOWNLOAD = `https://github.com/daemonforge/DayZ-UniveralApi/releases`;
+global.NEWVERSIONDOWNLOAD = `https://github.com/bage-jj/DayZ-Uapi-CH/releases`;
+global.ORIGINAL_REPO = `https://github.com/daemonforge/DayZ-UniveralApi`;
 if (global.SAVEPATH === undefined){
   global.SAVEPATH = "./";
 }
@@ -47,17 +48,19 @@ const RouterToxicity = require("./toxicityConnector");
 const RouterTrueRandom = require("./TrueRandom");
 const RouterCrypto = require("./crypto");
 
+
 var RateLimit = require('express-rate-limit');
 var limiter = RateLimit({
   windowMs: 10*1000, // 50 req/sec
   max: global.config.RequestLimit || 500,
-  message:  '{ "Status": "Error", "Error": "RateLimited" }',
+  message:  '{ "Status": "Error", "Error": "请求频率限制" }',
   keyGenerator: function (req /*, res*/) {
     return req.headers['CF-Connecting-IP'] || req.headers['x-forwarded-for'] || req.socket.remoteAddress || req.ip;
   },
   onLimitReached: function (req, res, options) {
     let ip = req.headers['CF-Connecting-IP'] || req.headers['x-forwarded-for'] || req.socket.remoteAddress || req.ip;
-    log("RateLimit Reached("  + ip + ") you may be under a DDoS Attack or you may need to increase your request limit");
+    log("请求频率限制触发("  + ip + ") 您可能正在遭受DDoS攻击，或需要增加请求限制");
+    
   },
   skip: function (req, res) {
     let ip = req.headers['CF-Connecting-IP'] || req.headers['x-forwarded-for'] || req.socket.remoteAddress || req.ip;
@@ -78,9 +81,9 @@ function startWebServer() {
         limit: '64mb'
     })(req, res, (err) => {
         if (err) {
-            log(`Bad Request Sent to "${req.url}" Error: ${err}`);
+            log(`无效请求发送到 "${req.url}" 错误: ${err}`);
             res.status(400);
-            res.json({Status: "error", Error: `Bad Request ${err}`});
+            res.json({Status: "error", Error: `无效请求 ${err}`});
             return;
         }
         next();
@@ -106,12 +109,13 @@ function startWebServer() {
   webapp.use('/Random', RouterTrueRandom);
   webapp.use('/Crypto', RouterCrypto);
 
+
   webapp.use('/', (req,res)=>{
     if (req.url != '/'){
-      log("Error invalid or is not a post Requested URL is:" + req.url);
+      log("错误：无效或非POST请求，请求URL：" + req.url);
     }
     res.status(501);
-    res.json({Status: "Error", Error: "Reqested bad URL"});
+    res.json({Status: "Error", Error: "请求的URL无效"});
   });
   let ServerKey = DefaultCert.Key;
   let ServerCert = DefaultCert.Cert;
@@ -132,7 +136,7 @@ function startWebServer() {
 
 
         } else if ('error' === type) {
-          console.log(type);
+          console.log(类型);
           log(`${object.Error}`, "warn");
         }
       },
@@ -157,7 +161,7 @@ function startWebServer() {
       let ip = global.config.IP || "0.0.0.0";
       let Port = process.env.PORT || global.config.Port || 8443
       httpsServer.listen(Port, ip, function() {
-        log(`Listening on ${httpsServer.address().address}:${httpsServer.address().port} with Let's Encrypt`);
+        log(`正在监听 ${httpsServer.address().address}:${httpsServer.address().port} (使用Let's Encrypt)`);
       });
       httpsServer.on('error', function (e) {
         // Handle your error here
@@ -170,11 +174,12 @@ function startWebServer() {
       var httpServer = glx.httpServer(function(req, res) {
         res.statusCode = 301;
         res.setHeader("Location", "https://" + req.headers.host + req.path);
-        res.end("Insecure connections are not allowed. Redirecting...");
+        res.end("不允许不安全的连接。正在重定向...");
+        
       });
 
       httpServer.listen(80, ip, function() {
-        log(`Listening on ${httpServer.address().address}:${httpServer.address().port} for Let's Encrypt`);
+        log(`正在监听 ${httpServer.address().address}:${httpServer.address().port} (用于Let's Encrypt验证)`);
       });
       httpServer.on('error', function (e) {
         // Handle your error here
@@ -187,7 +192,7 @@ function startWebServer() {
       cert: ServerCert
     }, webapp)
     .listen(Port, function () {
-      log('API Webservice started and is now listening on port "' + Port +'"!')
+      log('API 网络服务已启动，正在端口 "' + Port +'" 上监听!')
     });
   server.on('error', function (e) {
       // Handle your error here

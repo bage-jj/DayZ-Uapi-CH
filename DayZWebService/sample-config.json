@@ -22,6 +22,11 @@
         "Restrict_Sign_Up_Countries": ["blacklist", "CN"],
         "AllowToReRegister": false
     },
+    "QQ" :{
+        "GroupId": "",
+        "ApiUrl": "",
+        "Token": ""
+    },
     "Wit":{
     },
     "LUIS":{

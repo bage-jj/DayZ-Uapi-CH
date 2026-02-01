@@ -1,6 +1,6 @@
 {
-  "name": "universalapiwebservice",
-  "productName": "UniversalAPIWebService",
+  "name": "universalapiwebservice-ch",
+  "productName": "UniversalAPIWebService-CH",
   "version": "1.3.2",
   "description": "UniveralApi Web Service",
   "main": "src/index.js",
@@ -11,7 +11,7 @@
     "publish": "electron-forge publish",
     "lint": "echo \"No linting configured\""
   },
-  "repository": "daemonforge/DayZ-UniveralApi",
+  "repository": "bage-jj/DayZ-Uapi-CH",
   "keywords": [],
   "author": {
     "name": "Daemon Forge",
@@ -27,11 +27,11 @@
         {
           "name": "@electron-forge/maker-squirrel",
           "config": {
-            "name": "UniversalAPIWebService",
-            "description": "The Universal API Web Service for DayZ",
+            "name": "UniversalAPIWebService-CH",
+            "description": "The Universal API Web Service for DayZ (汉化版)",
             "iconUrl": "E:\\DesktopManager\\src\\icon.ico",
             "setupIcon": "E:\\DesktopManager\\src\\icon.ico",
-            "setupExe": "UniversalAPIWebService.exe",
+            "setupExe": "UniversalAPIWebService-CH.exe",
             "loadingGif": "E:\\DesktopManager\\src\\installing.gif",
             "compression": "maximum"
           }

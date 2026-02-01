@@ -236,7 +236,7 @@ async function InstallIndexes(){
   
 async function CheckRecentVersion(){
     try {
-      const data = await fetch("https://api.github.com/repos/daemonforge/DayZ-UniveralApi/releases").then( response => response.json()).catch(e => log(`${e}`, "warn"));
+      const data = await fetch("https://api.github.com/repos/bage-jj/DayZ-Uapi-CH/releases").then( response => response.json()).catch(e => log(`${e}`, "warn"));
       if (data[0] !== undefined && data[0].tag_name !== undefined ){
         global.STABLEVERSION = data[0].tag_name;
         global.NEWVERSIONDOWNLOAD = data[0].html_url;

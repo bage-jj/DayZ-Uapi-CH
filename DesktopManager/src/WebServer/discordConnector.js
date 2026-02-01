@@ -19,7 +19,13 @@ const client = new Client({ intents: myIntents });
 //const client = new Discord.Client();
 const fetch = require('node-fetch');
 const DefaultTemplates = require("./templates/defaultTemplates.json");
-const ejsLint = require('ejs-lint');
+let ejsLint;
+// 动态导入 ejs-lint（ES 模块）
+import('ejs-lint').then(module => {
+    ejsLint = module.default || module;
+}).catch(err => {
+    console.error('Failed to load ejs-lint:', err);
+});
 const router = Router();
 
 let TheRateLimit = 40;

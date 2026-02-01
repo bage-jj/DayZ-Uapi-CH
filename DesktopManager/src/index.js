@@ -427,8 +427,8 @@ autoUpdater.on('checking-for-update', () => {
 });
 
 autoUpdater.on('error', message => {
-  if (global.mainWindow !== undefined) global.mainWindow.send("log",{type: "warn", message: `Error Checking for updates ${feed} - ${message}`})
-  if (global.logs !== undefined) global.logs.push({type: "warn", message: `Error Checking for updates ${feed} - ${message}`});
+  if (global.mainWindow !== undefined) global.mainWindow.send("log",{type: "warn", message: `检查更新失败 ${feed} - ${message}`})
+  if (global.logs !== undefined) global.logs.push({type: "warn", message: `检查更新失败 ${feed} - ${message}`});
 })
 
 setTimeout(StartCheckingForUpdates, 6000);

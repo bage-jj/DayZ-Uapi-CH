@@ -1,0 +1,28 @@
+DayZ-Uapi-CH 发布版本说明
+
+版本: 1.3.2-CH
+发布日期: 2026-02-01
+
+这是 DayZ Universal Api 的汉化版本，基于原作修改。
+
+主要更改：
+1. 汉化所有日志消息和错误提示
+2. 移除QQ功能
+3. 更新版本检查链接到用户GitHub仓库
+4. 添加原作仓库链接
+5. 修改应用名称为带有-CH后缀
+
+文件说明：
+dayzwebservice-win-CH.exe - Windows 版本的 DayZ Web 服务
+dayzwebservice-linux-CH - Linux 版本的 DayZ Web 服务
+UniversalAPIWebService-CH.exe - Windows 桌面管理工具
+UniversalAPIWebService-1.3.2-CH-full.nupkg - NuGet 包
+sample-config.json - 示例配置文件
+
+使用说明：
+1. 复制 sample-config.json 为 config.json 并根据需要修改配置
+2. 运行对应的可执行文件启动服务
+3. 在 DayZ 服务器中配置 API 地址指向服务地址
+
+原作链接：https://github.com/daemonforge/DayZ-UniveralApi
+汉化版本：https://github.com/bage-jj/DayZ-Uapi-CH
